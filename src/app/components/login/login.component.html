@@ -5,12 +5,17 @@
 		</div>
 		<form [formGroup]="loginForm">
 			<input id="email" type="email" formControlName="email" placeholder="Email">
-			<small *ngIf="validationService.getFieldError(loginForm.get('email')) as error" class="error">{{ error }}</small>
+			<small *ngIf="validationService.getFieldError(loginForm.get('email')) as error" class="error">{{ error
+				}}</small>
 
 			<input id="password" type="password" formControlName="password" placeholder="Passowrd">
-			<small *ngIf="validationService.getFieldError(loginForm.get('password')) as error" class="error">{{ error }}</small>
+			<small *ngIf="validationService.getFieldError(loginForm.get('password')) as error" class="error">{{ error
+				}}</small>
 
-			<p-button label="Log in" type="submit" [disabled]="loginForm.invalid" (onClick)="onSubmit()" />
+			<button class="button-form" type="submit" [disabled]="loginForm.invalid" (click)="onSubmit()" >
+				Log in
+			</button>
+
 		</form>
 
 		<p>Form Status: {{ loginForm.status }}</p>

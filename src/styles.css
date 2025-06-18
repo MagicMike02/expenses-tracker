@@ -10,8 +10,8 @@
   --text-light: #ffffff;
 
   --surface-a: #ffffff;
-  --surface-b: #f5f5f5;
-  --border-color: #dddddd;
+  --surface-b: #f7f7fa;
+  --border-color: #dcdce6;
 
   /* Colori di stato utili */
   --error-color: #dc3545;
@@ -46,4 +46,25 @@ body {
   color: var(--error-color);
   font-size: 0.85rem;
   display: block;
+}
+
+.button-form {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  padding: 0.5rem 1.25rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.button-form:hover {
+  background-color: var(--primary-hover);
+  transform: translateY(-1px);
+}
+
+.button-form:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
