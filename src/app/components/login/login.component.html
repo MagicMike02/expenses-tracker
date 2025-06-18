@@ -1,0 +1,25 @@
+<div class="login-container">
+	<div class="login-card">
+		<div class="login-card-header">
+			Login
+		</div>
+		<form [formGroup]="loginForm">
+			<input id="email" type="email" formControlName="email" placeholder="Email">
+			<small *ngIf="validationService.getFieldError(loginForm.get('email')) as error" class="error">{{ error }}</small>
+
+			<input id="password" type="password" formControlName="password" placeholder="Passowrd">
+			<small *ngIf="validationService.getFieldError(loginForm.get('password')) as error" class="error">{{ error }}</small>
+
+			<p-button label="Log in" type="submit" [disabled]="loginForm.invalid" (onClick)="onSubmit()" />
+		</form>
+
+		<p>Form Status: {{ loginForm.status }}</p>
+		<p *ngIf="this.loginForm.valid">{{ this.loginForm.value | json }}</p>
+
+		<hr />
+
+		<div class="login-card-footer">
+			Don't have an account? <a routerLink="/signup">Sign Up</a>
+		</div>
+	</div>
+</div>

@@ -1,0 +1,50 @@
+:root {
+  /* Font principale */
+  --font-family: "Inter", sans-serif;
+
+  /* Colori principali tema chiaro */
+  --primary-color: #6a0dad;
+  --primary-hover: #8241c9;
+
+  --text-color: #1a1a1a;
+  --text-light: #ffffff;
+
+  --surface-a: #ffffff;
+  --surface-b: #f5f5f5;
+  --border-color: #dddddd;
+
+  /* Colori di stato utili */
+  --error-color: #dc3545;
+  --success-color: #28a745;
+  --warning-color: #ffc107;
+  --info-color: #17a2b8;
+}
+
+/* Tema scuro */
+body.dark-theme {
+  --primary-color: #bb86fc;
+  --primary-hover: #985eff;
+
+  --text-color: #eeeeee;
+  --text-light: #ffffff;
+
+  --surface-a: #1e1e1e;
+  --surface-b: #2a2a2a;
+  --border-color: #444444;
+}
+
+/* Stile globale */
+body {
+  background-color: var(--surface-a);
+  color: var(--text-color);
+  font-family: var(--font-family);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Messaggi errore */
+.error {
+  color: var(--error-color);
+  font-size: 0.85rem;
+  display: block;
+}
+
