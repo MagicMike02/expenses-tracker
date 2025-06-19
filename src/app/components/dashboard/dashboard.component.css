@@ -1,0 +1,22 @@
+.dashboard-container {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+}
+
+.dashboard-container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+.summary-cards {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
