@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from "./components/navbar/navbar.component";
+import { PrimeNG } from 'primeng/config';
 
 @Component({
 	selector: 'app-root',
@@ -9,8 +10,12 @@ import { NavbarComponent } from "./components/navbar/navbar.component";
 	styleUrl: './app.component.css',
 	providers: []
 })
-export class AppComponent {
+export class AppComponent implements OnInit{
 	title = 'expenses-tracker';
 
-	constructor() { }
+	 constructor(private primeng: PrimeNG) {}
+
+	  ngOnInit() {
+        this.primeng.ripple.set(true);
+    }
 }

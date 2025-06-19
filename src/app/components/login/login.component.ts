@@ -32,17 +32,7 @@ export class LoginComponent {
 		});
 	}
 
-
-	submittedData: any = null;
-
 	onSubmit(): void {
 
 	}
-
-
-
-
-
-
-
 }

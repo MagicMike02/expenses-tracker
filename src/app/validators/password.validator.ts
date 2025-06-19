@@ -14,8 +14,9 @@ export class PasswordValidator {
 		const hasNumber = /\d/.test(value);
 		const hasUpper = /[A-Z]/.test(value);
 		const hasLower = /[a-z]/.test(value);
+		const hasSpecial = /[!@#$%^&*(),.?":{}|<>]/.test(value);
 
-		const valid = hasNumber && hasUpper && hasLower;
+		const valid = hasNumber && hasUpper && hasLower && hasSpecial;
 
 		return valid ? null : { strong: true };
 	}
