@@ -17,7 +17,7 @@ export class ValidationService {
 			const minLength = control.errors['minlength'].requiredLength;
 			return `Minimo ${minLength} caratteri richiesti.`;
 		}
-		if (control.errors['strong']) return 'Password debole: usa almeno una maiuscola, una minuscola e un numero.';
+		if (control.errors['strong']) return 'Password debole: usa almeno una maiuscola, una minuscola, un numero e un carattere speciale.';
 
 		return null;
 	}

@@ -1,13 +1,13 @@
-<div class="login-container">
-	<div class="login-card">
-		<div class="login-card-header">
+<div class="auth-form-container">
+	<div class="auth-form-card">
+		<div class="auth-form-card-header">
 			Login
 		</div>
 		<form [formGroup]="loginForm">
-			<input id="email" type="email" formControlName="email" placeholder="Email">
+			<input id="email" type="email" formControlName="email" placeholder="Email or username">
 			<small *ngIf="validationService.getFieldError(loginForm.get('email')) as error" class="error">{{ error }}</small>
 
-			<input id="password" type="password" formControlName="password" placeholder="Passowrd">
+			<input id="password" type="password" formControlName="password" placeholder="Password">
 			<small *ngIf="validationService.getFieldError(loginForm.get('password')) as error" class="error">{{ error }}</small>
 
 			<button class="button-form" type="submit" [disabled]="loginForm.invalid" (click)="onSubmit()">
@@ -21,7 +21,7 @@
 
 		<hr />
 
-		<div class="login-card-footer">
+		<div class="auth-form-card-footer">
 			Don't have an account? <a routerLink="/signup">Sign Up</a>
 		</div>
 	</div>

@@ -1,1 +1,33 @@
-<p>signup works!</p>
+<div class="auth-form-container">
+    <div class="auth-form-card">
+        <div class="auth-form-card-header">
+            Sign Up
+        </div>
+        <form [formGroup]="signupForm">
+            <input id="username" type="text" formControlName="username" placeholder="Username" />
+            <small *ngIf="validationService.getFieldError(signupForm.get('username')) as error" class="error">{{ error }}</small>
+
+            <input id="email" type="email" formControlName="email" placeholder="Email" />
+            <small *ngIf="validationService.getFieldError(signupForm.get('email')) as error" class="error">{{ error }}</small>
+
+            <input id="password" type="password" formControlName="password" placeholder="Password" />
+            <small *ngIf="validationService.getFieldError(signupForm.get('password')) as error" class="error">{{ error }}</small>
+
+            <input id="confirmPassword" type="password" formControlName="confirmPassword" placeholder="Confirm Password" />
+            <small *ngIf="validationService.getFieldError(signupForm.get('confirmPassword')) as error" class="error">{{ error }}</small>
+
+            <button class="button-form" type="submit" [disabled]="signupForm.invalid" (click)="onSubmit()">
+                Sign Up
+            </button>
+        </form>
+
+        <p>Form Status: {{ signupForm.status }}</p>
+        <p *ngIf="signupForm.valid">{{ signupForm.value | json }}</p>
+
+        <hr />
+
+        <div class="auth-form-card-footer">
+            Already have an account? <a routerLink="/login">Log in</a>
+        </div>
+    </div>
+</div>

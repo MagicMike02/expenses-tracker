@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CardModule } from 'primeng/card';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FormGroup, FormControl, FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
 import { PasswordValidator } from '../../validators/password.validator';
@@ -17,12 +17,13 @@ export class LoginComponent {
 
 	loginForm: FormGroup;
 	private formBuilder = inject(FormBuilder);
+	private router = inject(Router);
 
 	constructor(public validationService: ValidationService) {
 		this.loginForm = this.formBuilder.group({
 			email: new FormControl('', [
 				Validators.required,
-				Validators.email
+				// Validators.email
 			]),
 			password: new FormControl('', [
 				Validators.required,
@@ -33,6 +34,11 @@ export class LoginComponent {
 	}
 
 	onSubmit(): void {
-
+		if (this.loginForm.valid) {
+			console.log('Login success (mock)', this.loginForm.value);
+			this.router.navigate(['/home']); 
+		} else {
+			console.warn('Login form is invalid');
+		}
 	}
 }

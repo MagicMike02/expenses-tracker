@@ -10,7 +10,7 @@
   --text-light: #ffffff;
 
   --surface-a: #ffffff;
-  --surface-b: #f7f7fa;
+  --surface-b: #f2f2f2;
   --border-color: #dcdce6;
 
   /* Colori di stato utili */
@@ -22,8 +22,10 @@
 
 /* Tema scuro */
 body.dark-theme {
-  --primary-color: #bb86fc;
-  --primary-hover: #985eff;
+  --primary-color: #6a0dad;
+  --primary-hover: #8241c9;
+  /* --primary-color: #bb86fc;
+  --primary-hover: #985eff; */
 
   --text-color: #eeeeee;
   --text-light: #ffffff;
@@ -44,11 +46,80 @@ body {
 /* Messaggi errore */
 .error {
   color: var(--error-color);
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   display: block;
+  margin-top: 0.25rem;
+  margin-bottom: 0.5rem;
 }
 
+.auth-form-container {
+  max-width: 400px;
+  padding: 1rem;
+  margin: 5rem auto;
+}
+
+.auth-form-card {
+  background-color: var(--surface-b);
+  border: 2px solid var(--border-color);
+  color: var(--text-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 2rem 2rem;
+  max-width: 400px;
+  margin: auto;
+  transition: box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.auth-form-card:hover {
+  box-shadow: 0 9px 15px rgba(0, 0, 0, 0.2);
+}
+
+.auth-form-card-header {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  padding-bottom: 1.5rem;
+}
+
+.auth-form-card-footer {
+  margin: 1rem 0;
+  text-align: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  /* gap: 0.75rem; */
+}
+
+
+input[type="email"],
+input[type="password"],
+input[type="text"] {
+  margin-top: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 4px;
+  outline-offset: 2px;
+  transition: border-color 0.2s ease-in-out;
+  background-color: var(--surface-a);
+  color: var(--text-color);
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 4px var(--primary-color);
+}
+
+
+
+
 .button-form {
+  margin: 0.5rem 0;
   background-color: var(--primary-color);
   color: var(--text-light);
   border: none;
@@ -67,4 +138,22 @@ body {
 .button-form:disabled {
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+
+p {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: var(--text-color);
+}
+
+a {
+  color: var(--primary-color);
+  text-decoration: none;
+  font-weight: 600;
+}
+
+a:hover {
+  text-decoration: underline;
+  cursor: pointer;
 }

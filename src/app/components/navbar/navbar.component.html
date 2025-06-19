@@ -4,13 +4,12 @@
 	</div>
 
 	<div class="navbar-right">
-		<!-- Toggle switch semplice -->
 		<label class="switch">
 			<input type="checkbox" [checked]="darkMode" (change)="toggleTheme()" />
 			<span class="slider"></span>
 		</label>
 
-		<a routerLink="/login" class="navbar-button login-button">Login</a>
+		<a routerLink="/login" routerLinkActive="active-link" class="navbar-button login-button">Login</a>
 		<a routerLink="/signup" class="navbar-button signup-button">Sign Up</a>
 	</div>
 </nav>
