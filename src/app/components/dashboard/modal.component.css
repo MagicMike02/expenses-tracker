@@ -98,7 +98,7 @@ select.modal-input option {
   background: var(--surface-card);
   border-radius: 12px;
   box-shadow: 0 4px 24px rgba(25, 118, 210, 0.13);
-  padding: 2rem 2.5rem 1.5rem 2.5rem;
+  padding: 0.5rem 1.5rem 1rem 1.5rem;
   z-index: 10000;
   min-width: 260px;
   text-align: center;

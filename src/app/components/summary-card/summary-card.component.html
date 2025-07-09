@@ -1,4 +1,5 @@
-<section class="summary-card" [class.income]="isIncome" [class.expense]="!isIncome">
-    <h3>{{ label }}</h3>
-    <p class="summary-amount">{{ amount | currency:'EUR':'symbol':'1.2-2' }}</p>
+<section class="summary-card" [ngStyle]="{ borderColor: color }">
+  <div class="summary-icon" *ngIf="icon" [innerHTML]="icon"></div>
+  <h3>{{ label }}</h3>
+  <p class="summary-amount">{{ amount | currency:'EUR':'symbol':'1.2-2' }}</p>
 </section>

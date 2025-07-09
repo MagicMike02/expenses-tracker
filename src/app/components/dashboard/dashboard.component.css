@@ -1,3 +1,71 @@
+/* Azioni tabella: stile pulsanti modifica/elimina */
+
+/* Pulsanti azione tabella: stile moderno, tema chiaro/scuro, icone SVG */
+.transactions-table-modern .action-btn {
+  background: var(--surface-b);
+  border: 1.5px solid var(--border-color);
+  cursor: pointer;
+  padding: 0.18rem 0.45rem 0.18rem 0.45rem;
+  font-size: 1.08rem;
+  margin: 0 0.08rem;
+  color: var(--primary-color);
+  border-radius: 7px;
+  transition: background 0.15s, color 0.15s, box-shadow 0.15s, border 0.15s;
+  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.04);
+  vertical-align: middle;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+}
+.transactions-table-modern .action-btn svg {
+  width: 1.15em;
+  height: 1.15em;
+  display: block;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 2.2;
+  pointer-events: none;
+}
+.transactions-table-modern .action-btn.edit {
+  color: var(--primary-color);
+}
+.transactions-table-modern .action-btn.delete {
+  color: var(--error-color, #e53935);
+}
+.transactions-table-modern .action-btn.edit:hover {
+  background: #e3f2fd;
+  color: #1976d2;
+  border-color: #1976d2;
+}
+.transactions-table-modern .action-btn.delete:hover {
+  background: #ffebee;
+  color: #e53935;
+  border-color: #e53935;
+}
+.transactions-table-modern .action-btn:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 1px;
+}
+
+@media (prefers-color-scheme: dark) {
+  .transactions-table-modern .action-btn {
+    background: var(--surface-a);
+    border-color: var(--border-color-dark, #333a);
+    color: var(--primary-color);
+  }
+  .transactions-table-modern .action-btn.edit:hover {
+    background: #1a2636;
+    color: #90caf9;
+    border-color: #90caf9;
+  }
+  .transactions-table-modern .action-btn.delete:hover {
+    background: #2d1a1a;
+    color: #ef9a9a;
+    border-color: #ef9a9a;
+  }
+}
 /* Tab switch modern style */
 .dashboard-tabs {
   display: flex;
@@ -293,8 +361,8 @@
 }
 .transactions-table-modern td {
   background: var(--surface-a);
-  border-radius: 0 0 6px 6px;
-  box-shadow: 0 1px 4px rgba(25, 118, 210, 0.03);
+  border-radius: 0;
+  box-shadow: none;
   color: var(--text-color);
   font-weight: 500;
 }

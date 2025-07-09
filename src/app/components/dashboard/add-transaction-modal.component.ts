@@ -59,6 +59,7 @@ export class AddTransactionModalComponent implements AfterViewInit {
     this.close.emit();
   }
   @Input() categories: string[] = [];
+  @Input() transaction: any = null;
   @Output() add = new EventEmitter<any>();
   @Output() close = new EventEmitter<void>();
   description: string = '';
@@ -71,9 +72,25 @@ export class AddTransactionModalComponent implements AfterViewInit {
   newCategory: string = '';
 
   constructor(private categoryService: CategoryService) {
-    // Imposta la data di default ad oggi (formato yyyy-MM-dd)
     const today = new Date();
     this.date = today.toISOString().slice(0, 10);
+  }
+
+  ngOnChanges() {
+    if (this.transaction) {
+      this.description = this.transaction.description || '';
+      this.amount = Math.abs(this.transaction.amount) || null;
+      this.type = this.transaction.type || 'expense';
+      this.category = this.transaction.category || '';
+      this.date = this.transaction.date || '';
+    } else {
+      this.description = '';
+      this.amount = null;
+      this.type = 'expense';
+      this.category = '';
+      const today = new Date();
+      this.date = today.toISOString().slice(0, 10);
+    }
   }
 
   ngDoCheck() {

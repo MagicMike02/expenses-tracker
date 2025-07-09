@@ -23,76 +23,38 @@
     </div>
   </section>
   <div class="dashboard-content-modern">
-    <div class="dashboard-tabs">
-      <button [class.active]="activeTab === 'table'" (click)="setTab('table')">Tabella</button>
-      <button [class.active]="activeTab === 'charts'" (click)="setTab('charts')">Grafici</button>
-    </div>
+    <app-tab-switch [activeTab]="activeTab" (tabChange)="setTab($event)"></app-tab-switch>
     <div class="dashboard-row">
       <ng-container *ngIf="activeTab === 'table'">
         <div class="transactions-section-modern">
-          <div class="transactions-actions-bar">
-            <div class="filters-group">
-              <select class="filter-select" [(ngModel)]="filterCategory" (change)="filterTransactions()">
-                <option value="">Tutte le categorie</option>
-                <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
-              </select>
-              <select class="filter-select" [(ngModel)]="filterType" (change)="filterTransactions()">
-                <option value="">Tutti i tipi</option>
-                <option value="income">Entrate</option>
-                <option value="expense">Uscite</option>
-              </select>
-              <input id="search-transactions" class="search-input" type="text" placeholder="Cerca o filtra..." [(ngModel)]="searchTerm" (input)="filterTransactions()" autocomplete="off" />
-            </div>
-            <div class="actions-group">
-              <button class="quick-action add" (click)="openAddModal()">Aggiungi</button>
-              <button class="quick-action export" (click)="exportTransactions()">Esporta</button>
-              <button class="quick-action pdf" (click)="downloadPDF()">Scarica PDF</button>
-            </div>
-          </div>
-          <table class="transactions-table-modern">
-            <thead>
-              <tr>
-                <th>Data</th>
-                <th>Descrizione</th>
-                <th>Categoria</th>
-                <th>Importo</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngIf="filteredTransactions.length === 0">
-                <td colspan="4" style="text-align:center; color:#888; font-style:italic;">Nessuna transazione trovata</td>
-              </tr>
-              <tr *ngFor="let t of filteredTransactions; let i = index" [class.row-highlight]="i === 0 && showRowHighlight">
-                <td>{{ t.date }}</td>
-                <td>{{ t.description }}</td>
-                <td><span class="badge badge-{{t.type}}">{{ t.category }}</span></td>
-                <td [ngClass]="{'income': t.amount > 0, 'expense': t.amount < 0}">
-                  {{ t.amount | currency:'EUR':'symbol':'1.2-2' }}
-                </td>
-              </tr>
-            </tbody>
-          </table>
+          <app-transactions-actions-bar
+            [categories]="categories"
+            [filterCategory]="filterCategory"
+            [filterType]="filterType"
+            [searchTerm]="searchTerm"
+            (filterTransactions)="filterTransactions()"
+            (openAddModal)="openAddModal()"
+            (exportTransactions)="exportTransactions()"
+            (downloadPDF)="downloadPDF()"
+          ></app-transactions-actions-bar>
+          <app-transactions-table 
+            [transactions]="filteredTransactions" 
+            [showRowHighlight]="showRowHighlight"
+            (edit)="onEditTransaction($event)"
+            (delete)="openRemoveModal($event.id)"></app-transactions-table>
           <app-add-transaction-modal
             *ngIf="showAddModal"
             (add)="addTransaction($event); showAddModal = false"
             (close)="showAddModal = false"
             [categories]="categories"
+            [transaction]="editingTransaction"
           ></app-add-transaction-modal>
           <app-modal *ngIf="showModal" [message]="modalMessage" (close)="showModal = false"></app-modal>
         </div>
       </ng-container>
       <ng-container *ngIf="activeTab === 'charts'">
         <div class="chart-section-modern">
-          <div class="charts-flex">
-            <div class="chart-box">
-              <h2>Andamento spese/entrate</h2>
-              <canvas id="expensesChart" width="480" height="320"></canvas>
-            </div>
-            <div class="chart-box">
-              <h3 class="pie-title">Distribuzione per categoria</h3>
-              <canvas id="pieChart" width="340" height="320"></canvas>
-            </div>
-          </div>
+          <app-dashboard-charts [transactions]="transactions"></app-dashboard-charts>
         </div>
       </ng-container>
     </div>

@@ -1,0 +1,19 @@
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  display: block;
+  width: 100%;
+  margin-bottom: 1.1rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  border: 1.5px solid var(--border-color, #ccc);
+  font-size: 1rem;
+  background: var(--surface-b, #fff);
+  color: var(--text-color, #222);
+  box-sizing: border-box;
+}
+input[type="text"]:last-child,
+input[type="email"]:last-child,
+input[type="password"]:last-child {
+  margin-bottom: 0.5rem;
+}

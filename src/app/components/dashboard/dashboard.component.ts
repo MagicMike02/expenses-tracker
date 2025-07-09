@@ -1,11 +1,14 @@
 import { Component, OnInit, DoCheck } from '@angular/core';
-import Chart from 'chart.js/auto';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ModalComponent } from './modal.component';
 import jsPDF from 'jspdf';
 import { Router } from '@angular/router';
 import { AddTransactionModalComponent } from "./add-transaction-modal.component";
+import { TabSwitchComponent } from './tab-switch.component';
+import { TransactionsActionsBarComponent } from './transactions-actions-bar.component';
+import { TransactionsTableComponent } from './transactions-table.component';
+import { DashboardChartsComponent } from './dashboard-charts.component';
 
 interface Transaction {
   id: number;
@@ -19,15 +22,22 @@ interface Transaction {
 @Component({
   selector: 'app-dashboard',
   standalone: true,
-  imports: [CommonModule, FormsModule, ModalComponent, AddTransactionModalComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    ModalComponent,
+    AddTransactionModalComponent,
+    TabSwitchComponent,
+    TransactionsActionsBarComponent,
+    TransactionsTableComponent,
+    DashboardChartsComponent
+  ],
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, DoCheck {
-  // Tab switch: 'table' or 'charts'
+  editingTransaction: Transaction | null = null;
   activeTab: 'table' | 'charts' = 'table';
-  private barChart: Chart|null = null;
-  private pieChart: Chart|null = null;
   showRowHighlight = false;
   showAddModal = false;
   showRemoveModal = false;
@@ -87,17 +97,34 @@ export class DashboardComponent implements OnInit, DoCheck {
   }
 
   openAddModal() {
+    this.editingTransaction = null;
+    this.showAddModal = true;
+  }
+
+  onEditTransaction(t: Transaction) {
+    this.editingTransaction = { ...t };
     this.showAddModal = true;
   }
   addTransaction(t: any) {
-    const newId = Math.max(...this.transactions.map(tr => tr.id), 0) + 1;
-    const tx = { ...t, id: newId };
-    this.transactions.unshift(tx);
+    if (this.editingTransaction) {
+      // Modifica esistente
+      const idx = this.transactions.findIndex(tr => tr.id === this.editingTransaction!.id);
+      if (idx > -1) {
+        this.transactions[idx] = { ...this.editingTransaction, ...t, id: this.editingTransaction.id };
+        this.modalMessage = 'Transazione modificata con successo!';
+      }
+      this.editingTransaction = null;
+    } else {
+      // Nuova transazione
+      const newId = Math.max(...this.transactions.map(tr => tr.id), 0) + 1;
+      const tx = { ...t, id: newId };
+      this.transactions.unshift(tx);
+      this.showRowHighlight = true;
+      setTimeout(() => { this.showRowHighlight = false; }, 1200);
+      this.modalMessage = 'Transazione aggiunta con successo!';
+    }
     this.categories = Array.from(new Set(this.transactions.map(tr => tr.category)));
     this.filterTransactions();
-    this.showRowHighlight = true;
-    setTimeout(() => { this.showRowHighlight = false; }, 1200);
-    this.modalMessage = 'Transazione aggiunta con successo!';
     this.showModal = true;
   }
   openRemoveModal(id?: number) {
@@ -144,81 +171,8 @@ export class DashboardComponent implements OnInit, DoCheck {
   }
 
 
-  // Renderizza i grafici quando la tab "Grafici" viene attivata
-  ngAfterViewChecked(): void {
-    if (this.activeTab === 'charts') {
-      this.renderCharts();
-    }
-  }
-
-  renderCharts() {
-    // Bar chart
-    const ctx = document.getElementById('expensesChart') as HTMLCanvasElement;
-    if (ctx && !this.barChart) {
-      const labels = this.transactions.map(t => t.date);
-      const incomes = this.transactions.map(t => t.amount > 0 ? t.amount : 0);
-      const expenses = this.transactions.map(t => t.amount < 0 ? Math.abs(t.amount) : 0);
-      this.barChart = new Chart(ctx, {
-        type: 'bar',
-        data: {
-          labels,
-          datasets: [
-            {
-              label: 'Entrate',
-              data: incomes,
-              backgroundColor: 'rgba(75, 192, 192, 0.6)',
-            },
-            {
-              label: 'Uscite',
-              data: expenses,
-              backgroundColor: 'rgba(255, 99, 132, 0.6)',
-            }
-          ]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: { position: 'top' },
-            title: { display: false }
-          }
-        }
-      });
-    }
-    // Pie chart
-    const pie = document.getElementById('pieChart') as HTMLCanvasElement;
-    if (pie && !this.pieChart) {
-      const catMap: { [cat: string]: number } = {};
-      this.transactions.forEach(t => {
-        if (!catMap[t.category]) catMap[t.category] = 0;
-        catMap[t.category] += Math.abs(t.amount);
-      });
-      this.pieChart = new Chart(pie, {
-        type: 'pie',
-        data: {
-          labels: Object.keys(catMap),
-          datasets: [{
-            data: Object.values(catMap),
-            backgroundColor: [
-              '#43a047', '#1976d2', '#e53935', '#ffb300', '#8e24aa', '#00897b', '#f4511e', '#3949ab'
-            ]
-          }]
-        },
-        options: {
-          plugins: {
-            legend: { position: 'bottom' },
-            title: { display: false }
-          }
-        }
-      });
-    }
-  }
-
-  // Quando si cambia tab, resetta i grafici se si torna su "Tabella"
+  // Cambia tab
   setTab(tab: 'table' | 'charts') {
     this.activeTab = tab;
-    if (tab === 'table') {
-      if (this.barChart) { this.barChart.destroy(); this.barChart = null; }
-      if (this.pieChart) { this.pieChart.destroy(); this.pieChart = null; }
-    }
   }
 }

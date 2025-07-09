@@ -11,5 +11,6 @@ import { Component, Input } from '@angular/core';
 export class SummaryCardComponent {
   @Input() label: string = '';
   @Input() amount: number = 0;
-  @Input() isIncome: boolean = true; 
+  @Input() icon: string = '';
+  @Input() color: string = '';
 }
