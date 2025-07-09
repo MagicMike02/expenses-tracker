@@ -35,6 +35,9 @@ export class LoginComponent {
 
 	onSubmit(): void {
 		if (this.loginForm.valid) {
+			// Salva autenticazione fittizia per la navbar
+			localStorage.setItem('isAuthenticated', 'true');
+			localStorage.setItem('userName', this.loginForm.value.email || 'Utente');
 			console.log('Login success (mock)', this.loginForm.value);
 			this.router.navigate(['/home']); 
 		} else {

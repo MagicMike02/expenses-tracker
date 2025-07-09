@@ -24,15 +24,20 @@
 body.dark-theme {
   --primary-color: #6a0dad;
   --primary-hover: #8241c9;
-  /* --primary-color: #bb86fc;
-  --primary-hover: #985eff; */
-
   --text-color: #eeeeee;
   --text-light: #ffffff;
+  --surface-a: #181a20;
+  --surface-b: #23262f;
+  --surface-card: #23262f;
+  --surface-card-elevated: #23262f;
+  --border-color: #393c49;
+  --shadow-dark: 0 4px 24px rgba(0,0,0,0.45);
+}
 
-  --surface-a: #1e1e1e;
-  --surface-b: #2a2a2a;
-  --border-color: #444444;
+:root {
+  --surface-card: #fff;
+  --surface-card-elevated: #f8fafc;
+  --shadow-dark: 0 4px 24px rgba(25, 118, 210, 0.07);
 }
 
 /* Stile globale */
@@ -97,7 +102,6 @@ form {
 input[type="email"],
 input[type="password"],
 input[type="text"] {
-  margin-top: 0.5rem;
   padding: 0.5rem 0.75rem;
   font-size: 1rem;
   border: 1px solid var(--border-color);

@@ -1,15 +1,24 @@
 <nav class="navbar">
-	<div class="navbar-left">
-		<img [src]="darkMode ? 'assets/logo-dark.png' : 'assets/logo-light.png'" alt="Logo App" class="app-logo" />
-	</div>
+  <div class="navbar-left">
+<img src="assets/Logo.png" alt="Logo App" class="app-logo" />
+  </div>
 
-	<div class="navbar-right">
-		<label class="switch">
-			<input type="checkbox" [checked]="darkMode" (change)="toggleTheme()" />
-			<span class="slider"></span>
-		</label>
+<div class="navbar-right">
+  <label class="switch">
+    <input type="checkbox" [checked]="darkMode" (change)="toggleTheme()" />
+    <span class="slider"></span>
+  </label>
 
-		<a routerLink="/login" routerLinkActive="active-link" class="navbar-button login-button">Login</a>
-		<a routerLink="/signup" class="navbar-button signup-button">Sign Up</a>
-	</div>
+  <ng-container *ngIf="isAuthenticated; else notAuth">
+    <div class="navbar-avatar" title="Profilo utente">
+      <img [src]="'https://ui-avatars.com/api/?name=' + userName + '&background=6a0dad&color=fff&rounded=true&size=40'" alt="Avatar utente" />
+    </div>
+    <button class="navbar-button login-button" (click)="logout()">Logout</button>
+  </ng-container>
+  <ng-template #notAuth>
+    <a *ngIf="!currentUrl.includes('/login')" routerLink="/login" routerLinkActive="active-link" class="navbar-button login-button">Login</a>
+    <a *ngIf="!currentUrl.includes('/signup')" routerLink="/signup" class="navbar-button signup-button">Sign Up</a>
+  </ng-template>
+  <button class="navbar-button" style="font-size:0.8rem;padding:0.2rem 0.7rem;margin-left:0.7rem;opacity:0.7;" (click)="clearStorage()">Svuota LS</button>
+</div>
 </nav>

@@ -1,0 +1,125 @@
+/* Migliora visibilità icona calendario input[type=date] in tema chiaro */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(0.3) brightness(0.7) contrast(1.5);
+}
+input[type="date"]::placeholder {
+  color: var(--text-color);
+}
+.modal-input {
+  width: 100%;
+  min-width: 180px;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: 6px;
+  border: 1.5px solid var(--border-color);
+  font-size: 1rem;
+  background: var(--surface-b);
+  color: var(--text-color);
+  box-sizing: border-box;
+}
+select.modal-input {
+  min-width: 220px;
+  max-width: 100%;
+  white-space: normal;
+  overflow: visible;
+  text-overflow: unset;
+}
+select.modal-input option {
+  white-space: normal;
+  max-width: 400px;
+  overflow-wrap: break-word;
+  word-break: break-all;
+}
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+.modal-newcat-actions {
+  display: flex;
+  gap: 0.7rem;
+  margin-top: 0.2rem;
+  margin-bottom: 1rem;
+}
+.modal-newcat-actions button {
+  padding: 0.22rem 0.7rem;
+  border-radius: 5px;
+  border: none;
+  font-size: 0.97rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+  outline: none;
+}
+.modal-newcat-actions button[type="button"]:first-child {
+  background: #1976d2;
+  color: #fff;
+  border: 1.5px solid #1976d2;
+}
+.modal-newcat-actions button[type="button"]:last-child {
+  background: #fff;
+  color: #1976d2;
+  border: 1.5px solid #1976d2;
+}
+.modal-newcat-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+.modal-actions button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  background: var(--primary-color);
+  color: #fff;
+  transition: background 0.2s;
+}
+.modal-actions button[type="button"] {
+  background: #888;
+}
+.modal-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+/* Forza la visibilità sopra ogni overlay */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.35);
+  z-index: 9999;
+}
+.modal-content {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--surface-card);
+  border-radius: 12px;
+  box-shadow: 0 4px 24px rgba(25, 118, 210, 0.13);
+  padding: 2rem 2.5rem 1.5rem 2.5rem;
+  z-index: 10000;
+  min-width: 260px;
+  text-align: center;
+  display: block;
+}
+.modal-message {
+  font-size: 1.1rem;
+  margin-bottom: 1.2rem;
+  color: var(--text-color);
+}
+.modal-close {
+  background: var(--primary-color);
+  color: #fff;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s;
+}
+.modal-close:hover {
+  background: var(--primary-hover);
+}
